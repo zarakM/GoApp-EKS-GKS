@@ -5,11 +5,11 @@ import (
 	"net/http"
 )
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Congratulations! Your Go application has been successfully deployed on Kubernetes.")
 }
 
 func main() {
-	http.HandleFunc("/", helloWorld)
-	http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":3000", nil)
 }
