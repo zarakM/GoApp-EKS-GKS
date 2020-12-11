@@ -1,7 +1,8 @@
 FROM golang:1.12.0-alpine3.9
-RUN mkdir /app
-ADD . /app
-WORKDIR /app
+
+WORKDIR $GOPATH/src/github.com/zarakM/GoApp-EKS-GKS
+
+COPY . .
 
 RUN go get -d -v ./...
 
@@ -9,7 +10,7 @@ RUN go install -v ./...
 
 EXPOSE 8080
 
-CMD ["go-sample-app"]
+CMD ["GoApp-EKS-GKS"]
 
 
 
