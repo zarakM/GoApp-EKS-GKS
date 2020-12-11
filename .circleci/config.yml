@@ -12,5 +12,5 @@ jobs:
       - run: docker build -t zarakmughal/goapp-cicd:main .
 
       # deploy the image
-      - run: docker push zarakmughal/goapp-cicd:$TAG
+      - run: docker push zarakmughal/goapp-cicd:main
 
