@@ -2,8 +2,14 @@ FROM golang:1.12.0-alpine3.9
 RUN mkdir /app
 ADD . /app
 WORKDIR /app
-RUN go build -o main .
-CMD ["/app/main"]
+
+RUN go get -d -v ./...
+
+RUN go install -v ./..
+
+EXPOSE 8080
+
+CMD ["go-sample-app"]
 
 
 
