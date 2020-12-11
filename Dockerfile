@@ -10,7 +10,7 @@ RUN go install -v ./...
 
 EXPOSE 8080
 
-CMD ["GoApp-EKS-GKS"]
+CMD ["./initial.go"]
 
 
 
