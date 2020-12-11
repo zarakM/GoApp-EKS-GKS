@@ -1,4 +1,4 @@
-FROM gcr.io/bitnami-containers/minideb-extras:jessie-r14
+FROM golang:1.8.5-jessie
 
 COPY . /app
 
