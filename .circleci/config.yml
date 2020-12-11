@@ -10,7 +10,7 @@ jobs:
 
       # build the application image
       - run: |
-        TAG=0.1.$CIRCLE_BUILD_NUM
+        TAG="main"
         docker build -t zarakmughal/goapp-cicd:$TAG .
 
       # deploy the image
