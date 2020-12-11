@@ -17,9 +17,9 @@ FROM golang:1.8.5-jessie
 # create a working directory
 WORKDIR /go/src/app
 # add source code
-ADD src src
+ADD . ./app
 # run main.go
-CMD ["go", "run", "src/main.go"]
+CMD ["go", "run", "./app/main.go"]
 # ## We specify the base image we need for our
 # ## go application
 # FROM golang:1.12.0-alpine3.9
