@@ -1,11 +1,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: zarakmughal/goapp-cicd
-        auth:
-          username: zarakmughal
-          password: $dockerhub_pass
+    machine: true
 
     steps:
       - checkout
