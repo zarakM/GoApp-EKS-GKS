@@ -9,8 +9,10 @@ jobs:
          echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
 
       # build the application image
-      - run: docker build -t zarakmughal/goapp-cicd:$CIRCLE_BRANCH .
+      - run: |
+        TAG=0.1.$CIRCLE_BUILD_NUM
+        docker build -t zarakmughal/goapp-cicd:$TAG .
 
       # deploy the image
-      - run: docker push zarakmughal/goapp-cicd:$CIRCLE_BRANCH
+      - run: docker push zarakmughal/goapp-cicd:$TAG
 
