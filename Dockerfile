@@ -1,19 +1,25 @@
-FROM golang:1.12.0-alpine3.9
+# FROM golang:1.12.0-alpine3.9
 
-WORKDIR $GOPATH/src/github.com/zarakM/GoApp-EKS-GKS
+# WORKDIR $GOPATH/src/github.com/zarakM/GoApp-EKS-GKS
 
-COPY . .
+# COPY . .
 
-RUN go get -d -v ./...
+# RUN go get -d -v ./...
 
-RUN go install -v ./...
+# RUN go install -v ./...
 
-EXPOSE 8080
+# EXPOSE 8080
 
-CMD ["./initial.go"]
+# CMD ["./initial.go"]
 
 
-
+FROM golang:1.8.5-jessie
+# create a working directory
+WORKDIR /go/src/app
+# add source code
+ADD src src
+# run main.go
+CMD ["go", "run", "src/main.go"]
 # ## We specify the base image we need for our
 # ## go application
 # FROM golang:1.12.0-alpine3.9
