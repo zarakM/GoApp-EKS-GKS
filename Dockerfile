@@ -1,6 +1,6 @@
 FROM gcr.io/bitnami-containers/minideb-extras:jessie-r14
 
-COPY /main /app/main
+COPY . /app
 
 WORKDIR /app
 
