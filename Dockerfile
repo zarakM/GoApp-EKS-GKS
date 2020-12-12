@@ -1,9 +1,6 @@
-FROM golang:1.8.5-jessie
-
+FROM golang:alpine
+RUN mkdir /app
 COPY . /app
-
 WORKDIR /app
-
-EXPOSE 3000
-
-ENTRYPOINT ["main.go"]
+RUN go build -o main . 
+CMD ["/app/main"]
