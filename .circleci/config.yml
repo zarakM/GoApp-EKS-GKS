@@ -15,10 +15,9 @@ jobs:
       - run: docker push zarakmughal/goapp-cicd:main
   deploy:
     machine: true
-
       - gke/create-cluster:
-            additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
-            cluster: gcp-testing
+          additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
+          cluster: gcp-testing
       - gke/create-node-pool:
           additional-args: >-
             --image-type=cos --no-enable-autoupgrade
