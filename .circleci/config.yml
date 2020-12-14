@@ -14,7 +14,8 @@ workflows:
               - run: docker build -t zarakmughal/goapp-cicd:main .
 
               - run: docker push zarakmughal/goapp-cicd:main
-              - gke/create-cluster:
+              
+      - gke/create-cluster:
                       additional-args: '--cluster-version=1.16 --enable-ip-alias --num-nodes=1'
                       cluster: gcp-testing
               - gke/create-node-pool:
@@ -25,4 +26,3 @@ workflows:
                   node-pool: goapp-node-pool
                   requires:
                     - gke/create-cluster
-      
