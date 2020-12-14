@@ -15,11 +15,11 @@ workflows:
           node-pool: goapp-node-pool
           requires:
             - gke/create-cluster
-      steps:
-              - checkout
-              - run: |
-                 echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
+          steps:
+            - checkout
+            - run: |
+               echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
 
-              - run: docker build -t zarakmughal/goapp-cicd:main .
+            - run: docker build -t zarakmughal/goapp-cicd:main .
 
-              - run: docker push zarakmughal/goapp-cicd:main
+            - run: docker push zarakmughal/goapp-cicd:main
