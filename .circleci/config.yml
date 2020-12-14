@@ -26,7 +26,7 @@ jobs:
       - gke/create-node-pool:
           additional-args: >-
             --image-type=cos --machine-type=e2-small --num-nodes=1
-          cluster: gcp-testing
+          cluster: goapp
           node-pool: goapp-node
 
 
