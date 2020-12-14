@@ -3,26 +3,15 @@ orbs:
 
 workflows:
   main:
-    jobs:
-      build:
-        machine: true
-            steps:
-              - checkout
-              - run: |
-                 echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
-
-              - run: docker build -t zarakmughal/goapp-cicd:main .
-
-              - run: docker push zarakmughal/goapp-cicd:main
-              
+    jobs:    
       - gke/create-cluster:
-                      additional-args: '--cluster-version=1.16 --enable-ip-alias --num-nodes=1'
-                      cluster: gcp-testing
-              - gke/create-node-pool:
-                  additional-args: >-
-                    --image-type=cos --no-enable-autoupgrade
-                    --machine-type=e2-small --num-nodes=2
-                  cluster: gcp-testing
-                  node-pool: goapp-node-pool
-                  requires:
-                    - gke/create-cluster
+          additional-args: '--cluster-version=1.16 --enable-ip-alias --num-nodes=1'
+          cluster: gcp-testing
+      - gke/create-node-pool:
+          additional-args: >-
+            --image-type=cos --no-enable-autoupgrade
+            --machine-type=e2-small --num-nodes=2
+          cluster: gcp-testing
+            node-pool: goapp-node-pool
+            requires:
+              - gke/create-cluster          
