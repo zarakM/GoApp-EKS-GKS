@@ -1,11 +1,21 @@
 orbs:
   gke: circleci/gcp-gke@1.1.0
 version: 2.1
-workflows:
-  main:
-    jobs:    
-      - gke/create-cluster:
-          additional-args: '--cluster-version=1.16 --enable-ip-alias --num-nodes=1'
+jobs:
+  containerization:
+    machine: true
+
+    steps:
+      - checkout
+      - run: |
+          echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
+
+      - run: docker build -t zarakmughal/goapp-cicd:main .
+
+      - run: docker push zarakmughal/goapp-cicd:main
+  deploy:
+    - gke/create-cluster:
+          additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
           cluster: gcp-testing
       - gke/create-node-pool:
           additional-args: >-
@@ -15,14 +25,9 @@ workflows:
           node-pool: goapp-node-pool
           requires:
             - gke/create-cluster
-      build:
-        machine: true
 
-        steps:
-          - checkout
-          - run: |
-             echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
-  
-          - run: docker build -t zarakmughal/goapp-cicd:main .
-
-          - run: docker push zarakmughal/goapp-cicd:main
+workflows:
+  test:
+    jobs:
+      - containerization
+      - deploy 
