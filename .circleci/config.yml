@@ -10,8 +10,16 @@ workflows:
       - gke/create-node-pool:
           additional-args: >-
             --image-type=cos --no-enable-autoupgrade
-            --machine-type=e2-small --num-nodes=2
+            --machine-type=e2-small --num-nodes=1
           cluster: gcp-testing
           node-pool: goapp-node-pool
           requires:
-            - gke/create-cluster          
+            - gke/create-cluster
+      steps:
+              - checkout
+              - run: |
+                 echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
+
+              - run: docker build -t zarakmughal/goapp-cicd:main .
+
+              - run: docker push zarakmughal/goapp-cicd:main
