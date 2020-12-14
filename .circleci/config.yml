@@ -17,14 +17,14 @@ jobs:
     - gke/create-cluster:
           additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
           cluster: gcp-testing
-      - gke/create-node-pool:
-          additional-args: >-
-            --image-type=cos --no-enable-autoupgrade
-            --machine-type=e2-small --num-nodes=1
-          cluster: gcp-testing
-          node-pool: goapp-node-pool
-          requires:
-            - gke/create-cluster
+    - gke/create-node-pool:
+        additional-args: >-
+          --image-type=cos --no-enable-autoupgrade
+          --machine-type=e2-small --num-nodes=1
+        cluster: gcp-testing
+        node-pool: goapp-node-pool
+        requires:
+          - gke/create-cluster
 
 workflows:
   test:
