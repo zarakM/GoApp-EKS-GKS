@@ -12,6 +12,6 @@ workflows:
             --image-type=cos --no-enable-autoupgrade
             --machine-type=e2-small --num-nodes=2
           cluster: gcp-testing
-            node-pool: goapp-node-pool
-            requires:
-              - gke/create-cluster          
+          node-pool: goapp-node-pool
+          requires:
+            - gke/create-cluster          
