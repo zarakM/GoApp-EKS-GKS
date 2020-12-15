@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   gcp-gke: circleci/gcp-gke@1.1.0
+  k8s: circleci/kubernetes@0.11.2
 
 jobs:
   containerization:
@@ -18,6 +19,7 @@ jobs:
     machine: true
     steps:
       - gcp-gke/install
+      - k8s/install
     # description: >
     #   Allows the kubectl client to work with a GKE cluster. Updates the kubectl
     #   configuration file with GKE cluster access credentials.
