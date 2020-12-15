@@ -20,7 +20,6 @@ jobs:
     steps:
       - gcp-gke/install
       - k8s/install-kubectl
-      - run: kubectl
     # description: >
     #   Allows the kubectl client to work with a GKE cluster. Updates the kubectl
     #   configuration file with GKE cluster access credentials.
@@ -103,4 +102,6 @@ workflows:
       # - deploy
       - update-kubeconfig
       - check
+          requires:
+            - update-kubeconfig
       # # - helm
