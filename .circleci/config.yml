@@ -5,7 +5,7 @@ orbs:
   helm: circleci/helm@1.0
 
 jobs:
-  containerization:
+  dockerize:
     machine: true
     steps:
       - checkout
@@ -38,10 +38,11 @@ jobs:
 workflows:
   test:
     jobs:
-      - installing_app
-      # - helm
-      # - containerization
-
+      - dockerize
+      - installing_app:
+          requires:
+            - dockerize
+      
 
 
 
