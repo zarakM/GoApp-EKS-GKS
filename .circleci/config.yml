@@ -40,6 +40,5 @@ workflows:
   test:
     jobs:
       # - containerization
-      # - deploy
       - deploy
       # # - helm
