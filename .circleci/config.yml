@@ -19,12 +19,8 @@ jobs:
   update-kubeconfig:
     machine: true
     steps:
-      - gcp-gke/install
-      - gcp-gke/init
-      - run:
-          command: |
-            gcloud container clusters get-credentials goapp
-            name: Update kubeconfig with cluster credentials
+      - gcloud/install
+      - k8s/install-kubectl
     # description: >
     #   Allows the kubectl client to work with a GKE cluster. Updates the kubectl
     #   configuration file with GKE cluster access credentials.
