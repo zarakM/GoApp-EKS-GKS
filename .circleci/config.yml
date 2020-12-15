@@ -15,15 +15,10 @@ jobs:
 
       - run: docker push zarakmughal/goapp-cicd:main
 
-  update-kubeconfig:
-    machine: true
-    steps:
-      - k8s/install-kubectl
-      - run: gcloud container clusters get-credentials check
-    
   deploy:
     machine: true
     steps:
+      - k8s/install-kubectl
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
@@ -37,16 +32,8 @@ jobs:
             --image-type=cos --machine-type=e2-small --num-nodes=1
           cluster: goapp
           node-pool: goapp-node
-  check:
-    machine: true
-    steps:
-      - run: gcloud
-      - run: kubectl
-  # helm:
-  #   machine: true
-  #   steps:
-  #     - install-helm-on-cluster:
-  #         cluster-name: goapp
+
+      - run: gcloud container clusters get-credentials goapp
 
 
 workflows:
