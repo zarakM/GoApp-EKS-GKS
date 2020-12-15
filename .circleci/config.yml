@@ -33,7 +33,7 @@ workflows:
   test:
     jobs:
       - installing_app
-      - helm:
+      # - helm
       # - containerization
 
 
