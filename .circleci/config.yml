@@ -19,7 +19,7 @@ jobs:
     machine: true
     steps:
       - k8s/install-kubectl
-      - gcloud container clusters get-credentials goapp
+      - gcloud container clusters get-credentials check
     
   deploy:
     machine: true
