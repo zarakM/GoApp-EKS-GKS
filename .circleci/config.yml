@@ -85,6 +85,7 @@ jobs:
     machine: true
     steps:
       - run: kubectl
+      - run: gcloud
   # helm:
   #   machine: true
   #   steps:
