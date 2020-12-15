@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  gcp-gke: circleci/gcp-gke@1.1.0
+  gke: circleci/gcp-gke@1.1.0
   k8s: circleci/kubernetes@0.11.2
 
 jobs:
