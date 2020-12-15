@@ -97,13 +97,13 @@ workflows:
   test:
     jobs:
       - check
-      - containerization
-      - deploy
-      - update-kubeconfig:
-          cluster: "goapp"
-          gcloud-service-key: GCLOUD_SERVICE_KEY
-          google-compute-zone: GOOGLE_COMPUTE_ZONE
-          google-project-id: GOOGLE_PROJECT_ID
-          install-kubectl: true
-          # perform-login: true
-      # - helm
+      # - containerization
+      # - deploy
+      # - update-kubeconfig:
+      #     cluster: "goapp"
+      #     gcloud-service-key: GCLOUD_SERVICE_KEY
+      #     google-compute-zone: GOOGLE_COMPUTE_ZONE
+      #     google-project-id: GOOGLE_PROJECT_ID
+      #     install-kubectl: true
+      #     # perform-login: true
+      # # - helm
