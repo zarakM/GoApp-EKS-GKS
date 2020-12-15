@@ -18,7 +18,7 @@ jobs:
   update-kubeconfig:
     machine: true
     steps:
-      - gcp-gke/install
+      # - gcp-gke/install
       - k8s/install-kubectl
     # description: >
     #   Allows the kubectl client to work with a GKE cluster. Updates the kubectl
