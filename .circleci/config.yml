@@ -2,6 +2,7 @@ orbs:
   gke: circleci/gcp-gke@1.1.0
   helm: circleci/helm@1.1.2
   gcp-gke: circleci/gcp-gke@1.1.0
+  gcp-cli: circleci/gcp-cli@2.1.0
 version: 2.1
 jobs:
   containerization:
