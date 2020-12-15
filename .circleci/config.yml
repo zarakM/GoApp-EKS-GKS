@@ -1,8 +1,6 @@
 orbs:
   gke: circleci/gcp-gke@1.1.0
   helm: circleci/helm@1.1.2
-  gcp-gke: circleci/gcp-gke@1.1.0
-  gcp-cli: circleci/gcp-cli@2.1.0
 version: 2.1
 jobs:
   containerization:
@@ -44,20 +42,20 @@ jobs:
         description: |
           Whether to install kubectl
         type: boolean
-      perform-login:
-        default: false
-        description: |
-          Whether to perform a login with the gcloud CLI.
-        type: boolean
+      # perform-login:
+      #   default: false
+      #   description: |
+      #     Whether to perform a login with the gcloud CLI.
+      #   type: boolean
     steps:
-      - gcloud/install
-      - when:
-          condition: <<parameters.perform-login>>
-          steps:
-            - gcloud/initialize:
-                gcloud-service-key: <<parameters.gcloud-service-key>>
-                google-compute-zone: <<parameters.google-compute-zone>>
-                google-project-id: <<parameters.google-project-id>>
+      # - gcloud/install
+      # - when:
+      #     condition: <<parameters.perform-login>>
+      #     steps:
+      #       - gcloud/initialize:
+      #           gcloud-service-key: <<parameters.gcloud-service-key>>
+      #           google-compute-zone: <<parameters.google-compute-zone>>
+      #           google-project-id: <<parameters.google-project-id>>
       - when:
           condition: <<parameters.install-kubectl>>
           steps:
@@ -102,5 +100,5 @@ workflows:
           google-compute-zone: GOOGLE_COMPUTE_ZONE
           google-project-id: GOOGLE_PROJECT_ID
           install-kubectl: true
-          perform-login: true
+          # perform-login: true
       # - helm
