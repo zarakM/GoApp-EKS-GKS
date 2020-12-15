@@ -15,7 +15,7 @@ jobs:
 
       - run: docker push zarakmughal/goapp-cicd:main
 
-  deploy:
+  installing_app:
     machine: true
     steps:
       - k8s/install-kubectl
@@ -23,22 +23,28 @@ jobs:
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - gke/create-cluster:
-          additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
-          cluster: goapp
-          install-kubectl: true
-      - gke/create-node-pool:
-          additional-args: >-
-            --image-type=cos --machine-type=e2-small --num-nodes=1
-          cluster: goapp
-          node-pool: goapp-node
 
-      - run: gcloud container clusters get-credentials goapp
+      - run: gcloud container clusters get-credentials goapp 
+      - run: kubectl config current-context
+
 
 
 workflows:
   test:
     jobs:
+      - installing_app
+      - helm:
       # - containerization
-      - deploy
-      # # - helm
+
+
+
+
+      # - gke/create-cluster:
+      #     additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
+      #     cluster: goapp
+      #     install-kubectl: true
+      # - gke/create-node-pool:
+      #     additional-args: >-
+      #       --image-type=cos --machine-type=e2-small --num-nodes=1
+      #     cluster: goapp
+      #     node-pool: goapp-node
