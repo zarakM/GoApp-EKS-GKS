@@ -20,6 +20,8 @@ jobs:
     machine: true
     steps:
       - k8s/install-kubectl
+      - helm/install-helm-client:
+          version: v3.2.4
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
