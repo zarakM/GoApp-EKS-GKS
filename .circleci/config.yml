@@ -73,7 +73,7 @@ jobs:
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - gke/create-cluster:
           additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
-          cluster: <<parameters.cluster>>
+          cluster: goapp
           install-kubectl: true
       - gke/create-node-pool:
           additional-args: >-
@@ -93,7 +93,6 @@ workflows:
     jobs:
       - containerization
       - deploy
-          cluster: goapp
       - update-kubeconfig
           cluster: goapp
           gcloud-service-key: GCLOUD_SERVICE_KEY
