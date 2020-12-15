@@ -101,7 +101,7 @@ workflows:
       # - containerization
       # - deploy
       - update-kubeconfig
-      - check
+      - check:
           requires:
             - update-kubeconfig
       # # - helm
