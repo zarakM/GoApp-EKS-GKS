@@ -16,6 +16,7 @@ jobs:
       - run: docker push zarakmughal/goapp-cicd:main
 
   update-kubeconfig:
+    machine: true
     description: >
       Allows the kubectl client to work with a GKE cluster. Updates the kubectl
       configuration file with GKE cluster access credentials.
