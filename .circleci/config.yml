@@ -23,7 +23,7 @@ jobs:
       - gcp-gke/init
       - run:
           command: |
-            gcloud container clusters get-credentials <<parameters.cluster>>
+            gcloud container clusters get-credentials goapp
             name: Update kubeconfig with cluster credentials
     # description: >
     #   Allows the kubectl client to work with a GKE cluster. Updates the kubectl
