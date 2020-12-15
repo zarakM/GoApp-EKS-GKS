@@ -6,8 +6,6 @@ orbs:
 version: 2.1
 jobs:
   containerization:
-    machine: true
-
     steps:
       - checkout
       - run: |
@@ -18,7 +16,6 @@ jobs:
       - run: docker push zarakmughal/goapp-cicd:main
 
   update-kubeconfig:
-    machine: true
     description: >
       Allows the kubectl client to work with a GKE cluster. Updates the kubectl
       configuration file with GKE cluster access credentials.
@@ -67,7 +64,6 @@ jobs:
           name: Update kubeconfig with cluster credentials
 
   deploy:
-    machine: true
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
@@ -83,7 +79,6 @@ jobs:
           cluster: goapp
           node-pool: goapp-node
   check:
-    machine: true
     steps:
       - run: kubectl
   # helm:
