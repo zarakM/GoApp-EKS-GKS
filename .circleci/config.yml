@@ -41,8 +41,5 @@ workflows:
     jobs:
       # - containerization
       # - deploy
-      - update-kubeconfig
-      - check:
-          requires:
-            - update-kubeconfig
+      - deploy
       # # - helm
