@@ -81,7 +81,11 @@ jobs:
             --image-type=cos --machine-type=e2-small --num-nodes=1
           cluster: goapp
           node-pool: goapp-node
-
+    check:
+    machine: true
+      steps:
+       - run: gcloud
+       - run: kubectl
   # helm:
   #   machine: true
   #   steps:
@@ -92,6 +96,7 @@ jobs:
 workflows:
   test:
     jobs:
+      - check
       - containerization
       - deploy
       - update-kubeconfig:
