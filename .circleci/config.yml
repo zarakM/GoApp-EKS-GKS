@@ -84,7 +84,6 @@ jobs:
   check:
     machine: true
     steps:
-      - run: gcloud
       - run: kubectl
   # helm:
   #   machine: true
