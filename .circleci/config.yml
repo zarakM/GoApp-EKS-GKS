@@ -81,7 +81,7 @@ jobs:
             --image-type=cos --machine-type=e2-small --num-nodes=1
           cluster: goapp
           node-pool: goapp-node
-    check:
+  check:
     machine: true
       steps:
        - run: gcloud
