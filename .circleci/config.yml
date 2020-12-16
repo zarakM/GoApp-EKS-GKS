@@ -32,7 +32,7 @@ jobs:
       - helm/install-helm-chart:
           chart: https://raw.githubusercontent.com/zarakM/go-webapp-helm-chart/master/gocicd-0.1.0.tgz
           helm-version: v3.2.4
-          release-name: hello
+          release-name: gocicd
 
 
 workflows:
