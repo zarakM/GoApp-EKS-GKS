@@ -26,13 +26,42 @@ jobs:
                   --image-type=cos --machine-type=e2-small --num-nodes=1
                 cluster: <<parameters.cluster_name>>
                 node-pool: nopool
+                
+  # dockerize:
+  #   machine: true
+  #   steps:
+  #     - checkout
+  #     - run: |
+  #         echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
+
+  #     - run: docker build -t zarakmughal/goapp-cicd:main .
+
+  #     - run: docker push zarakmughal/goapp-cicd:main
+
+  # installing_app:
+  #   machine: true
+  #   steps:
+  #     - k8s/install-kubectl
+  #     - helm/install-helm-client:
+  #         version: v3.2.4
+  #     - run: |
+  #         echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+  #         gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+  #         gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
+  #     - run: gcloud container clusters get-credentials chock
+  #     - run: helm repo update
+  #     - helm/install-helm-chart:
+  #         chart: https://raw.githubusercontent.com/zarakM/go-webapp-helm-chart/master/gocicd-0.1.0.tgz
+  #         helm-version: v3.2.4
+  #         release-name: goad
 
 
 workflows:
   test:
     jobs:
       - cluster_creation:
-          create_cluster: false
+          create_cluster: true
           cluster_name: goapp
       # - installing_app
       # - dockerize
