@@ -5,6 +5,27 @@ orbs:
   helm: circleci/helm@1.0
 
 jobs:
+  cluster_creation:
+    parameters:
+      create_cluster:
+        type: boolean
+        default: false
+      cluster_name:
+        type: string
+        default: ""
+    machine: true
+    steps:
+      - when:
+          condition: <<parameters.create_cluster>>
+          steps:
+            - gke/create-cluster:
+                additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
+                cluster: <<parameters.cluster_name>>
+            - gke/create-node-pool:
+                additional-args: >-
+                  --image-type=cos --machine-type=e2-small --num-nodes=1
+                cluster: <<parameters.cluster_name>>
+                node-pool: nopool
   dockerize:
     machine: true
     steps:
@@ -38,7 +59,10 @@ jobs:
 workflows:
   test:
     jobs:
-      - installing_app
+      - cluster_creation:
+          create_cluster: false
+          cluster_name: goapp
+      # - installing_app
       # - dockerize
       # - installing_app:
       #     requires:
@@ -47,12 +71,4 @@ workflows:
 
 
 
-      # - gke/create-cluster:
-      #     additional-args: "--cluster-version=1.16 --enable-ip-alias --num-nodes=1"
-      #     cluster: goapp
-      #     install-kubectl: true
-      # - gke/create-node-pool:
-      #     additional-args: >-
-      #       --image-type=cos --machine-type=e2-small --num-nodes=1
-      #     cluster: goapp
-      #     node-pool: goapp-node
+      
