@@ -75,12 +75,11 @@ jobs:
 workflows:
   test:
     jobs:
-      # - cluster_creation:
-      #     create_cluster: false
-      #     cluster_name: goapp
-      - dockerize:
-          dockerize: false
-      # - installing_app
+      - cluster_creation:
+          create_cluster: true
+          cluster_name: goapp
+      # - dockerize:
+      #     dockerize: false
       # - installing_app:
       #     requires:
       #       - dockerize
