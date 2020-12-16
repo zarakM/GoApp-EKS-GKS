@@ -38,11 +38,11 @@ jobs:
 workflows:
   test:
     jobs:
-      # - installing_app
-      - dockerize
-      - installing_app:
-          requires:
-            - dockerize
+      - installing_app
+      # - dockerize
+      # - installing_app:
+      #     requires:
+      #       - dockerize
       
 
 
