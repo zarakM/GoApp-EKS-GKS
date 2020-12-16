@@ -29,18 +29,29 @@ jobs:
       - unless:
           condition: <<parameters.create_cluster>>
           steps:
-            - run: echo "Alreadty Created"
+            - run: echo "Already Created"
                 
   dockerize:
+    parameters:
+      dockerize:
+        type: boolean
+        default: false
     machine: true
     steps:
-      - checkout
-      - run: |
-          echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
+      - when:
+          condition: <<parameters.dockerize>>
+          steps:
+            - checkout
+            - run: |
+                echo "$dockerhub_pass" | docker login --username zarakmughal --password-stdin
 
-      - run: docker build -t zarakmughal/goapp-cicd:main .
+            - run: docker build -t zarakmughal/goapp-cicd:main .
 
-      - run: docker push zarakmughal/goapp-cicd:main
+            - run: docker push zarakmughal/goapp-cicd:main
+      - unless:
+          condition: <<parameters.dockerize>>
+          steps:
+            - run: echo "Already containerized"
 
   installing_app:
     machine: true
@@ -64,11 +75,12 @@ jobs:
 workflows:
   test:
     jobs:
-      - cluster_creation:
-          create_cluster: false
-          cluster_name: goapp
+      # - cluster_creation:
+      #     create_cluster: false
+      #     cluster_name: goapp
+      - dockerize:
+          dockerize: false
       # - installing_app
-      # - dockerize
       # - installing_app:
       #     requires:
       #       - dockerize
