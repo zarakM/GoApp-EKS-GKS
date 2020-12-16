@@ -83,7 +83,7 @@ workflows:
   test:
     jobs:
       - cluster_creation:
-          create_cluster: true
+          create_cluster: false
           cluster_name: goapp
       - dockerize:
           dockerize: true
