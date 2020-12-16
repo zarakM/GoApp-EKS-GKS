@@ -58,6 +58,9 @@ jobs:
             - run: echo "Already containerized"
 
   installing_app:
+    cluster_name:
+      type: string
+      default: ""
     machine: true
     steps:
       - k8s/install-kubectl
@@ -68,8 +71,7 @@ jobs:
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
-      - run: gcloud container clusters get-credentials goapps
-      - run: helm repo update
+      - run: gcloud container clusters get-credentials <<parameters.cluster_name>>
       - helm/install-helm-chart:
           chart: https://raw.githubusercontent.com/zarakM/go-webapp-helm-chart/master/gocicd-0.1.0.tgz
           helm-version: v3.2.4
@@ -87,10 +89,6 @@ workflows:
           requires:
             - cluster_creation
       - installing_app:
+          cluster_name: goapps
           requires:
             - dockerize
-      
-
-
-
-      
