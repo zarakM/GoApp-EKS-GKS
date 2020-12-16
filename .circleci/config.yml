@@ -27,21 +27,22 @@ jobs:
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
-      - run: gcloud container clusters get-credentials check
+      - run: gcloud container clusters get-credentials chock
       - run: helm repo update
       - helm/install-helm-chart:
           chart: https://raw.githubusercontent.com/zarakM/go-webapp-helm-chart/master/gocicd-0.1.0.tgz
           helm-version: v3.2.4
-          release-name: s
+          release-name: go
 
 
 workflows:
   test:
     jobs:
-      - dockerize
-      - installing_app:
-          requires:
-            - dockerize
+      - installing_app
+      # - dockerize
+      # - installing_app:
+      #     requires:
+      #       - dockerize
       
 
 
