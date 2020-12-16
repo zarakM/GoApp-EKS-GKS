@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   gke: circleci/gcp-gke@1.1.0
-  k8s: circleci/kubernetes@0.11.2
   helm: circleci/helm@1.0
 
 jobs:
@@ -64,7 +63,6 @@ jobs:
         default: ""
     machine: true
     steps:
-      - k8s/install-kubectl
       - helm/install-helm-client:
           version: v3.2.4
       - run: |
