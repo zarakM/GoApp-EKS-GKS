@@ -78,16 +78,27 @@ jobs:
           release-name: goad
 
   eks:
+    parameters:
+      cluster_name:
+        type: string
+        default: ""
     machine: true
     steps:
       - aws-eks/create-cluster:
-          cluster-name: my-eks-helm-demo
+          cluster-name: << parameters.cluster-name >>
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+      - helm/install-helm-chart:
+          chart: https://raw.githubusercontent.com/zarakM/go-webapp-helm-chart/master/gocicd-0.1.0.tgz
+          helm-version: v3.2.4
+          release-name: goad
 
 
 workflows:
   test:
     jobs:
-      - eks
+      - eks:
+          cluster_name: goapps
       # - cluster_creation:
       #     create_cluster: true
       #     cluster_name: goapps
